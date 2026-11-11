@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shree Krishna Fresh Milk & Dairy - Farm Fresh Daily Milk Delivery</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            dairy: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+              gold: '#d97706'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-stone-50 text-gray-800 antialiased min-h-screen flex flex-col justify-between">
+
+  <!-- Printable Area (visible only when printing) -->
+  <div id="printable-content" class="hidden"></div>
+
+  <!-- Main App Shell -->
+  <div class="no-print flex-1 flex flex-col">
+
+    <!-- Top Announcement & View Switcher Bar -->
+    <div class="bg-emerald-950 text-white text-xs px-4 py-2 border-b border-emerald-900/60">
+      <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center space-x-2.5">
+          <span class="bg-emerald-800 text-emerald-200 px-2 py-0.5 rounded-md font-mono text-[11px] font-bold tracking-wide">DAILY ROUTE</span>
+          <span class="text-gray-200 text-[11px] sm:text-xs">
+            🌅 Morn: <strong class="text-white">5:30–7:30 AM</strong> <span class="hidden sm:inline">| 🌆 Eve: <strong class="text-white">5:00–7:00 PM</strong></span>
+          </span>
+        </div>
+
+        <div class="flex items-center space-x-3 text-xs">
+          <a href="#" class="shop-phone-link text-emerald-200 hover:text-white font-medium flex items-center gap-1.5 transition">
+            <span>📞</span> <span class="shop-phone-text font-bold">+91 98765 43210</span>
+          </a>
+          <span class="text-emerald-800">|</span>
+          
+          <!-- Mode Switcher Tabs -->
+          <div class="bg-emerald-900/90 p-0.5 rounded-lg flex items-center space-x-1 border border-emerald-800">
+            <button id="tab-btn-store" onclick="App.switchView('storefront')" 
+              class="active-view-tab px-2.5 sm:px-3 py-1 rounded-md font-bold text-xs transition flex items-center gap-1">
+              🛍️ <span>Customer Store</span>
+            </button>
+            <button id="tab-btn-owner" onclick="App.switchView('owner')" 
+              class="px-2.5 sm:px-3 py-1 rounded-md font-bold text-xs text-gray-300 hover:text-white transition flex items-center gap-1">
+              ⚙️ <span>Owner Hub</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notice Banner: Online Orders are Optional -->
+    <div class="bg-amber-50 border-b border-amber-200/80 px-4 py-2 text-center text-xs text-amber-900">
+      <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-1.5">
+        <span class="font-extrabold flex items-center gap-1">💡 <span>Counter & Direct Orders Welcome:</span></span> 
+        <span class="text-gray-700">Online ordering is 100% optional! Walk-ins, phone orders, and WhatsApp orders are always accepted.</span>
+        <a href="#" class="shop-phone-link font-bold text-emerald-800 hover:text-emerald-950 underline ml-1">Call Dairy Directly</a>
+      </div>
+    </div>
+
+    <!-- Sticky Main Header -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-200/90 shadow-xs">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-3 sm:gap-4">
+        
+        <!-- Brand Logo & Shop Name -->
+        <div class="flex items-center space-x-3 cursor-pointer select-none" onclick="App.switchView('storefront')">
+          <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-emerald-800 to-emerald-600 flex items-center justify-center text-2xl shadow-md text-white border-2 border-white shrink-0">
+            🥛
+          </div>
+          <div class="min-w-0">
+            <h1 class="text-base sm:text-lg md:text-xl font-black text-gray-950 tracking-tight flex items-center flex-wrap gap-1.5 leading-tight">
+              <span class="shop-title">Shree Krishna Fresh Milk & Dairy</span>
+              <span class="bg-amber-100 text-amber-800 text-[10px] font-extrabold px-2 py-0.5 rounded-full border border-amber-200 shrink-0">100% PURE</span>
+            </h1>
+            <p class="text-[11px] sm:text-xs text-emerald-800 font-medium flex items-center flex-wrap gap-1 mt-0.5 leading-snug">
+              <span>🌱</span>
+              <span class="shop-subtitle line-clamp-1">Pure, Farm-Fresh Morning & Evening Milk Delivered to Your Doorstep</span>
+              <span class="hidden sm:inline text-gray-400">•</span>
+              <span class="hidden sm:inline text-gray-500">Owner: <span class="shop-owner font-semibold text-gray-800">Suresh Patel</span></span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Navigation Links -->
+        <nav class="hidden lg:flex items-center space-x-5 text-sm font-semibold text-gray-700 shrink-0">
+          <a href="#rates-section" class="hover:text-emerald-700 transition">Today's Rates</a>
+          <a href="#products-section" class="hover:text-emerald-700 transition">Products</a>
+          <a href="#subscription-builder-section" class="hover:text-emerald-700 transition flex items-center gap-1">
+            <span>📅</span> Daily Subscription
+          </a>
+          <button onclick="App.openVacationModal()" class="hover:text-emerald-700 transition flex items-center gap-1 text-amber-700 font-bold">
+            <span>⏸️</span> Vacation / Pause
+          </button>
+          <button onclick="App.openAreaCheckerModal()" class="hover:text-emerald-700 transition flex items-center gap-1">
+            <span>📍</span> Delivery Areas
+          </button>
+        </nav>
+
+        <!-- Right Quick Actions -->
+        <div class="flex items-center space-x-2 sm:space-x-3 shrink-0">
+          <!-- WhatsApp Quick Contact -->
+          <a href="#" target="_blank" class="shop-whatsapp-link hidden sm:flex items-center space-x-1.5 bg-green-600 hover:bg-green-700 text-white font-bold text-xs px-3.5 py-2 rounded-xl transition shadow-sm">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+            <span>WhatsApp</span>
+          </a>
+
+          <!-- Cart Button (Optional) -->
+          <button onclick="App.toggleCart(true)" 
+            title="Cart (Optional)"
+            class="relative bg-emerald-800 hover:bg-emerald-900 text-white p-2 sm:p-2.5 rounded-xl shadow-sm transition flex items-center justify-center">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+            <span id="cart-badge" class="hidden absolute -top-1.5 -right-1.5 bg-amber-500 text-white font-extrabold text-[11px] rounded-full w-5 h-5 flex items-center justify-center shadow">
+              0
+            </span>
+          </button>
+
+          <!-- Mobile Hamburger Menu Button -->
+          <button id="mobile-menu-btn" onclick="App.toggleMobileMenu()" class="lg:hidden p-2 rounded-xl text-gray-700 hover:bg-gray-100 transition focus:outline-none" aria-label="Toggle navigation menu">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Mobile Dropdown Navigation -->
+      <div id="mobile-nav-menu" class="hidden lg:hidden bg-white border-t border-gray-100 px-4 py-3 space-y-2.5 shadow-md">
+        <a href="#rates-section" onclick="App.toggleMobileMenu(true)" class="block text-sm font-semibold text-gray-800 hover:text-emerald-700 py-1.5 border-b border-gray-50">Today's Rates</a>
+        <a href="#products-section" onclick="App.toggleMobileMenu(true)" class="block text-sm font-semibold text-gray-800 hover:text-emerald-700 py-1.5 border-b border-gray-50">🧀 Products & Bakery</a>
+        <a href="#subscription-builder-section" onclick="App.toggleMobileMenu(true)" class="block text-sm font-semibold text-gray-800 hover:text-emerald-700 py-1.5 border-b border-gray-50">📅 Daily Milk Subscription</a>
+        <button onclick="App.openVacationModal(); App.toggleMobileMenu(true);" class="w-full text-left text-sm font-bold text-amber-700 hover:text-amber-800 py-1.5 border-b border-gray-50 flex items-center gap-1.5">
+          <span>⏸️</span> Vacation / Pause Deliveries
+        </button>
+        <button onclick="App.openAreaCheckerModal(); App.toggleMobileMenu(true);" class="w-full text-left text-sm font-semibold text-gray-800 hover:text-emerald-700 py-1.5 border-b border-gray-50 flex items-center gap-1.5">
+          <span>📍</span> Check Delivery Areas
+        </button>
+        <div class="pt-2 flex items-center space-x-2">
+          <a href="#" target="_blank" class="shop-whatsapp-link flex-1 bg-green-600 text-white text-center py-2 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5">
+            <span>💬</span> WhatsApp Order
+          </a>
+          <a href="#" class="shop-phone-link flex-1 bg-emerald-50 text-emerald-900 border border-emerald-200 text-center py-2 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5">
+            <span>📞</span> Call Shop
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============================================================== -->
+    <!-- VIEW 1: CUSTOMER STOREFRONT -->
+    <!-- ============================================================== -->
+    <main id="storefront-view" class="flex-1">
+
+      <!-- Today's Rate Ticker Section -->
+      <section id="rates-section" class="bg-emerald-50/70 border-b border-emerald-100 py-3.5 px-4 overflow-x-auto">
+        <div class="max-w-7xl mx-auto flex items-center space-x-4">
+          <div class="flex items-center space-x-2 text-emerald-900 font-extrabold text-xs whitespace-nowrap bg-emerald-200/80 px-3 py-1.5 rounded-lg">
+            <span>📢</span>
+            <span>TODAY'S DAIRY MILK RATES:</span>
+          </div>
+          <div id="rate-ticker-cards" class="flex items-center space-x-3 overflow-x-auto pb-1 flex-nowrap">
+            <!-- Dynamic Rates Loaded Here -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Hero Banner Section -->
+      <section class="relative bg-gradient-to-b from-emerald-50 via-white to-stone-50 pt-10 pb-16 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            
+            <!-- Left Headline & CTAs -->
+            <div class="lg:col-span-7 space-y-6">
+              <div class="inline-flex items-center space-x-2 bg-emerald-100 text-emerald-900 px-3.5 py-1.5 rounded-full text-xs font-bold">
+                <span>🌿</span>
+                <span>Fresh from Local Village Dairy Cattle</span>
+                <span class="text-emerald-400">•</span>
+                <span class="text-emerald-700">100% Unadulterated & Pure</span>
+              </div>
+
+              <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black text-gray-950 tracking-tight leading-tight">
+                Fresh, Pure Cow & Buffalo Milk Delivered to Your Doorstep <span class="text-emerald-700 underline decoration-amber-400 decoration-wavy">Every Morning</span> by 7 AM.
+              </h2>
+
+              <p class="text-gray-600 text-base sm:text-lg max-w-2xl leading-relaxed">
+                Enjoy rich, creamy buffalo milk and wholesome pure cow milk collected daily from local dairy farmers. Chilled at 4°C immediately, tested for zero water adulteration, and delivered in hygienic stainless steel cans or glass bottles.
+              </p>
+
+              <!-- Quick Order & Direct Contact Box -->
+              <div class="p-4 bg-white rounded-2xl border border-gray-200 shadow-sm flex flex-wrap items-center justify-between gap-3">
+                <div class="text-xs">
+                  <span class="font-bold text-gray-900 block">📞 Direct Orders & Parlour Walk-ins:</span>
+                  <span class="text-gray-500">Order online or simply call / WhatsApp us directly.</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <a href="#" class="shop-phone-link bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs px-4 py-2 rounded-xl transition shadow flex items-center gap-1">
+                    <span>📞</span> <span class="shop-phone-text">Call Us</span>
+                  </a>
+                  <a href="#" target="_blank" class="shop-whatsapp-link bg-green-600 hover:bg-green-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition shadow flex items-center gap-1">
+                    <span>💬</span> WhatsApp Order
+                  </a>
+                </div>
+              </div>
+
+              <!-- Quick CTAs -->
+              <div class="flex flex-wrap gap-3.5 pt-1">
+                <a href="#subscription-builder-section" 
+                  class="bg-emerald-700 hover:bg-emerald-800 text-white font-extrabold px-6 py-3.5 rounded-xl shadow-lg shadow-emerald-700/20 transition flex items-center gap-2 text-sm">
+                  <span>📅</span> Start Daily Milk Subscription
+                </a>
+
+                <a href="#products-section" 
+                  class="bg-white hover:bg-gray-50 text-gray-900 border border-gray-300 font-bold px-6 py-3.5 rounded-xl transition flex items-center gap-2 text-sm shadow-sm">
+                  <span>🧀</span> Fresh Paneer, Ghee & Curd
+                </a>
+
+                <button onclick="App.openVacationModal()" 
+                  class="bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 font-bold px-4 py-3.5 rounded-xl transition flex items-center gap-2 text-sm">
+                  <span>⏸️</span> Vacation / Pause Milk
+                </button>
+              </div>
+
+              <!-- Trust Stats Banner -->
+              <div class="pt-6 grid grid-cols-3 gap-4 border-t border-gray-200/80">
+                <div>
+                  <div class="text-2xl sm:text-3xl font-black text-emerald-800">250+</div>
+                  <div class="text-xs text-gray-500 font-medium">Daily Doorstep Families</div>
+                </div>
+                <div>
+                  <div class="text-2xl sm:text-3xl font-black text-emerald-800">4°C</div>
+                  <div class="text-xs text-gray-500 font-medium">Strict Cold Chain Chilling</div>
+                </div>
+                <div>
+                  <div class="text-2xl sm:text-3xl font-black text-emerald-800">0%</div>
+                  <div class="text-xs text-gray-500 font-medium">Zero Adulteration Guarantee</div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Right Hero Visual Card -->
+            <div class="lg:col-span-5">
+              <div class="relative bg-white rounded-3xl p-4 shadow-xl border border-gray-100">
+                <img src="https://images.unsplash.com/photo-1527153857715-3908f2ae5e81?auto=format&fit=crop&w=800&q=80" 
+                  alt="Farm Fresh Milk" class="w-full h-80 object-cover rounded-2xl" />
+                
+                <div class="absolute -bottom-4 left-6 bg-white rounded-2xl p-3.5 shadow-lg border border-gray-100 flex items-center space-x-3">
+                  <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center text-xl">
+                    ✨
+                  </div>
+                  <div>
+                    <div class="text-xs font-black text-gray-900">Thick Natural Malai Layer</div>
+                    <div class="text-[11px] text-gray-500">Perfect for homemade ghee & rich tea</div>
+                  </div>
+                </div>
+
+                <div class="absolute top-8 -right-4 bg-emerald-800 text-white rounded-2xl p-3 shadow-lg flex items-center space-x-2">
+                  <span class="text-lg">⏰</span>
+                  <div class="text-xs font-bold">
+                    <span>Delivered by 7:00 AM</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- SECTION: FRESH DAIRY PRODUCTS CATALOG -->
+      <!-- ============================================================== -->
+      <section id="products-section" class="py-16 bg-stone-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+            <div>
+              <span class="text-xs font-extrabold uppercase tracking-wider text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full">
+                Fresh Store Items
+              </span>
+              <h2 class="text-3xl font-black text-gray-950 mt-2">Daily Dairy & Bakery Products</h2>
+              <p class="text-sm text-gray-600 mt-1">Fresh pure milk, paneer, ghee, curd, and daily fresh bakery snacks.</p>
+            </div>
+
+            <!-- Category Filter Buttons -->
+            <div class="flex items-center space-x-2 overflow-x-auto pb-2">
+              <button onclick="App.filterCategory('all', this)" class="cat-btn bg-emerald-700 text-white text-xs font-bold px-4 py-2 rounded-xl transition shadow-sm">
+                All Products
+              </button>
+              <button onclick="App.filterCategory('milk', this)" class="cat-btn bg-white text-gray-700 text-xs font-bold px-4 py-2 rounded-xl transition hover:bg-gray-100">
+                Fresh Milk
+              </button>
+              <button onclick="App.filterCategory('paneer-ghee', this)" class="cat-btn bg-white text-gray-700 text-xs font-bold px-4 py-2 rounded-xl transition hover:bg-gray-100">
+                Paneer, Ghee & Butter
+              </button>
+              <button onclick="App.filterCategory('curd', this)" class="cat-btn bg-white text-gray-700 text-xs font-bold px-4 py-2 rounded-xl transition hover:bg-gray-100">
+                Fresh Curd
+              </button>
+              <button onclick="App.filterCategory('bakery', this)" class="cat-btn bg-white text-gray-700 text-xs font-bold px-4 py-2 rounded-xl transition hover:bg-gray-100">
+                Bakery & Toast
+              </button>
+            </div>
+          </div>
+
+          <!-- Product Cards Grid -->
+          <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Dynamic products loaded by app.js -->
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- SECTION: INTERACTIVE SUBSCRIPTION BUILDER WIZARD -->
+      <!-- ============================================================== -->
+      <section id="subscription-builder-section" class="py-16 bg-white border-y border-gray-200">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div class="text-center max-w-2xl mx-auto mb-10">
+            <span class="text-xs font-extrabold uppercase tracking-wider text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full">
+              Hassle-Free Morning Routine
+            </span>
+            <h2 class="text-3xl font-black text-gray-950 mt-2">Build Your Daily Milk Subscription</h2>
+            <p class="text-sm text-gray-600 mt-2">
+              Select your preferred milk type, daily quantity, and delivery slot. Enjoy flexible pausing anytime when you travel!
+            </p>
+          </div>
+
+          <form onsubmit="App.submitSubscriptionForm(event)" class="bg-stone-50 border border-gray-200 rounded-3xl p-6 sm:p-8 shadow-sm">
+            
+            <!-- Step 1: Milk Type -->
+            <div class="mb-8">
+              <label class="block text-sm font-bold text-gray-900 mb-3 flex items-center justify-between">
+                <span>Step 1: Choose Milk Variety</span>
+                <span class="text-xs text-gray-500 font-normal">Freshly procured daily</span>
+              </label>
+
+              <div id="sub-milk-options" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                
+                <div onclick="App.selectSubOption('milk', 'cowMilk', this)" data-milk="cowMilk"
+                  class="selection-card selected p-4 rounded-2xl bg-white flex flex-col justify-between">
+                  <div>
+                    <div class="text-2xl mb-1">🥛</div>
+                    <div class="font-bold text-gray-900 text-sm">Pure Cow Milk</div>
+                    <div class="text-xs text-emerald-700 font-semibold">100% Pure & Fresh</div>
+                    <div class="text-[11px] text-gray-500 mt-1">3.8% Fat • Light & Easy to Digest</div>
+                  </div>
+                  <div class="mt-3 pt-2 border-t border-gray-100 text-emerald-800 font-black text-base">
+                    ₹62 <span class="text-xs font-normal text-gray-500">/Litre</span>
+                  </div>
+                </div>
+
+                <div onclick="App.selectSubOption('milk', 'buffaloMilk', this)" data-milk="buffaloMilk"
+                  class="selection-card p-4 rounded-2xl bg-white flex flex-col justify-between">
+                  <div>
+                    <div class="text-2xl mb-1">🐃</div>
+                    <div class="font-bold text-gray-900 text-sm">Creamy Buffalo Milk</div>
+                    <div class="text-xs text-emerald-700 font-semibold">Thick & Full Cream</div>
+                    <div class="text-[11px] text-gray-500 mt-1">6.8% Fat • Rich Malai for Tea & Curd</div>
+                  </div>
+                  <div class="mt-3 pt-2 border-t border-gray-100 text-emerald-800 font-black text-base">
+                    ₹76 <span class="text-xs font-normal text-gray-500">/Litre</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Step 2: Daily Quantity -->
+            <div class="mb-8">
+              <label class="block text-sm font-bold text-gray-900 mb-3">
+                Step 2: Choose Daily Quantity
+              </label>
+
+              <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+                <div onclick="App.selectSubOption('qty', 0.5, this)" class="selection-card p-3 rounded-xl bg-white text-center font-bold text-sm">
+                  0.5 Litre (500 ml)
+                </div>
+                <div onclick="App.selectSubOption('qty', 1.0, this)" class="selection-card selected p-3 rounded-xl bg-white text-center font-bold text-sm">
+                  1.0 Litre
+                </div>
+                <div onclick="App.selectSubOption('qty', 1.5, this)" class="selection-card p-3 rounded-xl bg-white text-center font-bold text-sm">
+                  1.5 Litres
+                </div>
+                <div onclick="App.selectSubOption('qty', 2.0, this)" class="selection-card p-3 rounded-xl bg-white text-center font-bold text-sm">
+                  2.0 Litres
+                </div>
+                <div onclick="App.selectSubOption('qty', 3.0, this)" class="selection-card p-3 rounded-xl bg-white text-center font-bold text-sm">
+                  3.0 Litres
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 3: Frequency & Delivery Slot -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              
+              <div>
+                <label class="block text-sm font-bold text-gray-900 mb-2">
+                  Step 3: Delivery Frequency
+                </label>
+                <div class="grid grid-cols-3 gap-2">
+                  <div onclick="App.selectSubOption('freq', 'daily', this)" class="selection-card selected p-3 rounded-xl bg-white text-center text-xs font-bold">
+                    Everyday (Daily)
+                  </div>
+                  <div onclick="App.selectSubOption('freq', 'alternate', this)" class="selection-card p-3 rounded-xl bg-white text-center text-xs font-bold">
+                    Alternate Days
+                  </div>
+                  <div onclick="App.selectSubOption('freq', 'weekdays', this)" class="selection-card p-3 rounded-xl bg-white text-center text-xs font-bold">
+                    Mon - Sat
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-bold text-gray-900 mb-2">
+                  Step 4: Delivery Time Slot
+                </label>
+                <div class="grid grid-cols-3 gap-2">
+                  <div onclick="App.selectSubOption('slot', 'morning', this)" class="selection-card selected p-3 rounded-xl bg-white text-center text-xs font-bold">
+                    🌅 Morning<br><span class="text-[10px] text-gray-500 font-normal">5:30 - 7:30 AM</span>
+                  </div>
+                  <div onclick="App.selectSubOption('slot', 'evening', this)" class="selection-card p-3 rounded-xl bg-white text-center text-xs font-bold">
+                    🌆 Evening<br><span class="text-[10px] text-gray-500 font-normal">5:00 - 7:00 PM</span>
+                  </div>
+                  <div onclick="App.selectSubOption('slot', 'both', this)" class="selection-card p-3 rounded-xl bg-white text-center text-xs font-bold">
+                    🔄 Both Slots<br><span class="text-[10px] text-gray-500 font-normal">Morn & Eve</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Monthly Forecast Pill -->
+            <div class="bg-emerald-900 text-white rounded-2xl p-4 sm:p-5 mb-8 flex flex-wrap items-center justify-between gap-4">
+              <div>
+                <span class="text-xs uppercase font-extrabold tracking-wider text-emerald-300 block">ESTIMATED MONTHLY PLAN</span>
+                <div class="text-sm text-gray-200 mt-1">
+                  Based on current daily rate of <strong id="sub-forecast-rate" class="text-white">₹62/L</strong>
+                </div>
+              </div>
+
+              <div class="flex items-center space-x-6">
+                <div class="text-right">
+                  <span class="text-xs text-emerald-300 block">Monthly Milk Vol</span>
+                  <span id="sub-forecast-litres" class="text-lg font-bold text-white">30 Litres</span>
+                </div>
+                <div class="text-right border-l border-emerald-800 pl-6">
+                  <span class="text-xs text-emerald-300 block">Estimated Bill (30 Days)</span>
+                  <span id="sub-forecast-price" class="text-2xl font-black text-amber-400">₹1,860</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 5: Customer Address & Delivery Preferences -->
+            <div class="border-t border-gray-200 pt-6">
+              <h3 class="text-base font-bold text-gray-900 mb-4">Step 5: Your Delivery Details</h3>
+              
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-semibold text-gray-700 mb-1">Your Full Name *</label>
+                  <input type="text" name="customerName" required placeholder="e.g. Ramesh Verma" 
+                    class="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none" />
+                </div>
+
+                <div>
+                  <label class="block text-xs font-semibold text-gray-700 mb-1">WhatsApp / Phone Number *</label>
+                  <input type="tel" name="customerPhone" required placeholder="e.g. 9811223344" 
+                    class="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none" />
+                </div>
+
+                <div class="sm:col-span-2">
+                  <label class="block text-xs font-semibold text-gray-700 mb-1">Complete Doorstep Address & Apartment/House No. *</label>
+                  <input type="text" name="customerAddress" required placeholder="e.g. Flat 302, Tower B, Sri Krishna Residency" 
+                    class="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none" />
+                </div>
+
+                <div>
+                  <label class="block text-xs font-semibold text-gray-700 mb-1">Container Preference</label>
+                  <select name="containerPref" class="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+                    <option value="Glass Bottle (Dairy Provided)">Fresh Glass Bottle (Dairy Provided)</option>
+                    <option value="Customer Milk Can (Left Outside Door)">Customer Own Milk Can (Left Outside)</option>
+                    <option value="Sealed Food-grade Pouches">Sealed Food-Grade Pouches</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-semibold text-gray-700 mb-1">Start Date</label>
+                  <input type="date" name="startDate" 
+                    class="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none" />
+                </div>
+
+                <div class="sm:col-span-2">
+                  <label class="block text-xs font-semibold text-gray-700 mb-1">Special Delivery Instructions (Optional)</label>
+                  <input type="text" name="customerNotes" placeholder="e.g. Please hang bag on gate / do not ring bell before 6:30 AM" 
+                    class="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none" />
+                </div>
+              </div>
+
+              <div class="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="text-xs text-gray-500 flex items-center gap-1.5">
+                  <span>🔒</span>
+                  <span>No advance payment needed. Monthly billing with easy UPI or cash.</span>
+                </div>
+
+                <button type="submit" 
+                  class="w-full sm:w-auto bg-emerald-700 hover:bg-emerald-800 text-white font-extrabold px-8 py-3.5 rounded-xl shadow-lg transition flex items-center justify-center gap-2 text-sm">
+                  <span>✓</span> Start My Daily Milk Delivery
+                </button>
+              </div>
+
+            </div>
+
+          </form>
+
+        </div>
+      </section>
+
+      <!-- Vacation & Customer Flexibility Section -->
+      <section class="py-12 bg-amber-500 text-stone-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div class="space-y-1">
+            <span class="bg-stone-900 text-amber-300 text-[10px] font-black uppercase px-2 py-0.5 rounded">TRAVEL FLEXIBILITY</span>
+            <h3 class="text-2xl font-black text-stone-950">Going Out of Town or Need Extra Milk?</h3>
+            <p class="text-sm font-medium text-stone-900/80">Pause milk deliveries during vacations in 10 seconds. You are never billed for days you don't receive milk.</p>
+          </div>
+          <div class="flex items-center space-x-3 whitespace-nowrap">
+            <button onclick="App.openVacationModal()" class="bg-stone-950 hover:bg-black text-white font-extrabold px-6 py-3 rounded-xl text-sm transition shadow-lg">
+              ⏸️ Pause or Resume Milk
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Why Choose Us / Quality Assurance -->
+      <section class="py-16 bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center max-w-2xl mx-auto mb-12">
+            <h2 class="text-3xl font-black text-gray-950">Why Families Trust Our Daily Milk</h2>
+            <p class="text-sm text-gray-600 mt-2">We treat your family's health with the same care as our own children.</p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="p-6 rounded-2xl bg-stone-50 border border-gray-100 text-center">
+              <div class="w-14 h-14 mx-auto rounded-2xl bg-emerald-100 flex items-center justify-center text-2xl mb-4">
+                🌿
+              </div>
+              <h3 class="font-bold text-gray-900 text-base">Grass-Fed Healthy Cattle</h3>
+              <p class="text-xs text-gray-600 mt-2 leading-relaxed">Sourced from vetted local dairy farmers who feed fresh green fodder and avoid synthetic hormone injections.</p>
+            </div>
+
+            <div class="p-6 rounded-2xl bg-stone-50 border border-gray-100 text-center">
+              <div class="w-14 h-14 mx-auto rounded-2xl bg-blue-100 flex items-center justify-center text-2xl mb-4">
+                ❄️
+              </div>
+              <h3 class="font-bold text-gray-900 text-base">Immediate 4°C Chilling</h3>
+              <p class="text-xs text-gray-600 mt-2 leading-relaxed">Milk is chilled within 60 minutes of milking to stop bacterial growth naturally without any preservatives.</p>
+            </div>
+
+            <div class="p-6 rounded-2xl bg-stone-50 border border-gray-100 text-center">
+              <div class="w-14 h-14 mx-auto rounded-2xl bg-amber-100 flex items-center justify-center text-2xl mb-4">
+                🔬
+              </div>
+              <h3 class="font-bold text-gray-900 text-base">Zero Adulteration Tested</h3>
+              <p class="text-xs text-gray-600 mt-2 leading-relaxed">Daily lactometer and SNF quality verification. We guarantee 0% added water, 0% detergent, and 0% starch.</p>
+            </div>
+
+            <div class="p-6 rounded-2xl bg-stone-50 border border-gray-100 text-center">
+              <div class="w-14 h-14 mx-auto rounded-2xl bg-purple-100 flex items-center justify-center text-2xl mb-4">
+                🚴
+              </div>
+              <h3 class="font-bold text-gray-900 text-base">Before 7 AM Delivery</h3>
+              <p class="text-xs text-gray-600 mt-2 leading-relaxed">Consistent morning delivery boys who arrive quietly before your morning tea time, rain or shine.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Customer Testimonials -->
+      <section class="py-16 bg-stone-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="text-xs font-bold text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full uppercase">Customer Love</span>
+            <h2 class="text-3xl font-black text-gray-950 mt-2">What Our Daily Subscribers Say</h2>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-2xl border border-gray-200/70 shadow-sm flex flex-col justify-between">
+              <div class="space-y-3">
+                <div class="text-amber-400 text-base">★★★★★</div>
+                <p class="text-xs text-gray-700 leading-relaxed italic">
+                  "We stopped buying packet milk 8 months ago. Shree Krishna Dairy's cow milk has natural sweetness and thick cream layer (malai) for homemade ghee! Always arrives before 6:30 AM without fail."
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-gray-100 flex items-center space-x-3">
+                <div class="w-9 h-9 rounded-full bg-emerald-700 text-white font-bold flex items-center justify-center text-sm">
+                  S
+                </div>
+                <div>
+                  <h4 class="font-bold text-xs text-gray-900">Sunita Deshmukh</h4>
+                  <p class="text-[11px] text-gray-500">Sunrise Residency, Sector 15</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl border border-gray-200/70 shadow-sm flex flex-col justify-between">
+              <div class="space-y-3">
+                <div class="text-amber-400 text-base">★★★★★</div>
+                <p class="text-xs text-gray-700 leading-relaxed italic">
+                  "Prompt delivery, reliable owner Suresh ji, and clean stainless steel delivery cans. Their vacation pause feature makes it super easy when we travel."
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-gray-100 flex items-center space-x-3">
+                <div class="w-9 h-9 rounded-full bg-blue-700 text-white font-bold flex items-center justify-center text-sm">
+                  R
+                </div>
+                <div>
+                  <h4 class="font-bold text-xs text-gray-900">Col. R. S. Bhinder</h4>
+                  <p class="text-[11px] text-gray-500">Sector 14 Civil Lines</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl border border-gray-200/70 shadow-sm flex flex-col justify-between">
+              <div class="space-y-3">
+                <div class="text-amber-400 text-base">★★★★★</div>
+                <p class="text-xs text-gray-700 leading-relaxed italic">
+                  "The paneer here is out of this world! It literally melts in the mouth. Also, the bill tracking is very transparent with WhatsApp receipts every month."
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-gray-100 flex items-center space-x-3">
+                <div class="w-9 h-9 rounded-full bg-amber-700 text-white font-bold flex items-center justify-center text-sm">
+                  S
+                </div>
+                <div>
+                  <h4 class="font-bold text-xs text-gray-900">Sneha Kapur</h4>
+                  <p class="text-[11px] text-gray-500">Greenfield Society</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ============================================================== -->
+    <!-- VIEW 2: SHOP OWNER ADMIN DASHBOARD & FARMER HUB -->
+    <!-- ============================================================== -->
+    <main id="owner-view" class="hidden flex-1 bg-slate-50 py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        
+        <!-- Header Banner -->
+        <div class="bg-emerald-900 rounded-3xl p-6 text-white flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-xl">
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="bg-emerald-800 text-emerald-200 text-xs font-bold px-2.5 py-0.5 rounded">SHOP MANAGEMENT PORTAL</span>
+              <span class="text-xs text-emerald-300">| Today: <strong class="text-white">9 Nov 2026</strong></span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-black mt-2">Milk Shop Delivery & Farmer Manager</h2>
+            <p class="text-xs text-emerald-200 mt-1">Manage local farmer milk collections, settlements (Daily/Weekly/Monthly), route sheets, and billing.</p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2">
+            <button onclick="App.openAddFarmerModal()" class="bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition shadow flex items-center gap-1.5">
+              <span>🧑‍🌾</span> + Register New Farmer
+            </button>
+            <button onclick="App.openAddCustomerModal()" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition shadow flex items-center gap-1.5">
+              <span>+</span> Add Customer
+            </button>
+            <button onclick="App.switchView('storefront')" class="bg-emerald-950 hover:bg-black text-emerald-200 text-xs font-bold px-4 py-2.5 rounded-xl transition">
+              Back to Storefront
+            </button>
+          </div>
+        </div>
+
+        <!-- 4 Key Daily Metrics Cards -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+            <span class="text-xs text-gray-500 font-bold block">REGISTERED FARMERS</span>
+            <div id="stat-farmer-count" class="text-2xl sm:text-3xl font-black text-purple-700 mt-1">0</div>
+            <span class="text-[11px] text-gray-500">Farmers supplying milk daily</span>
+          </div>
+
+          <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+            <span class="text-xs text-gray-500 font-bold block">FARMER DUES (PAYABLE)</span>
+            <div id="stat-farmer-payables" class="text-2xl sm:text-3xl font-black text-red-600 mt-1">₹0</div>
+            <span class="text-[11px] text-red-600 font-medium">Daily / Weekly / Monthly balances</span>
+          </div>
+
+          <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+            <span class="text-xs text-gray-500 font-bold block">CUSTOMER DISPATCH</span>
+            <div id="stat-morning-litres" class="text-2xl sm:text-3xl font-black text-emerald-700 mt-1">0 L</div>
+            <span class="text-[11px] text-gray-500">Morning & evening subscriptions</span>
+          </div>
+
+          <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+            <span class="text-xs text-gray-500 font-bold block">ACTIVE SUBSCRIBERS</span>
+            <div id="stat-active-subscribers" class="text-2xl sm:text-3xl font-black text-gray-900 mt-1">0</div>
+            <span class="text-[11px] text-emerald-700 font-medium">Doorstep milk subscribers</span>
+          </div>
+        </div>
+
+        <!-- OWNER HUB SUBTABS NAVIGATION -->
+        <div class="flex items-center space-x-2 border-b border-gray-200 overflow-x-auto pb-2">
+          <button data-tab="farmers" onclick="App.switchOwnerSubTab('farmers')" 
+            class="owner-subtab-btn bg-emerald-700 text-white font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition shadow-sm whitespace-nowrap flex items-center gap-1.5">
+            <span>🧑‍🌾</span> Farmer Dashboard
+          </button>
+
+          <button data-tab="delivery" onclick="App.switchOwnerSubTab('delivery')" 
+            class="owner-subtab-btn bg-white text-gray-700 font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition hover:bg-gray-100 whitespace-nowrap flex items-center gap-1.5 border border-gray-200">
+            <span>📋</span> Delivery Route Sheet
+          </button>
+
+          <button data-tab="ledger" onclick="App.switchOwnerSubTab('ledger')" 
+            class="owner-subtab-btn bg-white text-gray-700 font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition hover:bg-gray-100 whitespace-nowrap flex items-center gap-1.5 border border-gray-200">
+            <span>📖</span> Customer Ledger & Khata
+          </button>
+
+          <button data-tab="procurement" onclick="App.switchOwnerSubTab('procurement')" 
+            class="owner-subtab-btn bg-white text-gray-700 font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition hover:bg-gray-100 whitespace-nowrap flex items-center gap-1.5 border border-gray-200">
+            <span>🥛</span> Milk Reconciliation
+          </button>
+
+          <button data-tab="settings" onclick="App.switchOwnerSubTab('settings')" 
+            class="owner-subtab-btn bg-white text-gray-700 font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition hover:bg-gray-100 whitespace-nowrap flex items-center gap-1.5 border border-gray-200">
+            <span>🏷️</span> Rates & Settings
+          </button>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- SUBPANEL 1: FARMER DASHBOARD -->
+        <!-- ============================================================== -->
+        <div id="panel-farmers" class="owner-subpanel space-y-6">
+          
+          <!-- Farmer Dashboard Highlights -->
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="p-4 bg-purple-50 border border-purple-200 rounded-2xl">
+              <span class="text-xs text-purple-900 font-bold block">REGISTERED FARMERS</span>
+              <div id="farmer-total-registered" class="text-2xl font-black text-purple-900 mt-1">0</div>
+              <span class="text-[11px] text-purple-700">Supplying local farmers</span>
+            </div>
+            <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl">
+              <span class="text-xs text-emerald-900 font-bold block">TODAY'S FARM MILK INWARD</span>
+              <div id="farmer-today-litres" class="text-2xl font-black text-emerald-900 mt-1">0 L</div>
+              <span class="text-[11px] text-emerald-700">Morning & evening total</span>
+            </div>
+            <div class="p-4 bg-blue-50 border border-blue-200 rounded-2xl">
+              <span class="text-xs text-blue-900 font-bold block">TODAY'S PURCHASE VALUE</span>
+              <div id="farmer-today-cost" class="text-2xl font-black text-blue-900 mt-1">₹0</div>
+              <span class="text-[11px] text-blue-700">Purchased from farmers</span>
+            </div>
+            <div class="p-4 bg-amber-50 border border-amber-200 rounded-2xl">
+              <span class="text-xs text-amber-900 font-bold block">TOTAL DUES TO FARMERS</span>
+              <div id="farmer-total-dues" class="text-2xl font-black text-red-600 mt-1">₹0</div>
+              <span class="text-[11px] text-amber-800">Pending settlement balances</span>
+            </div>
+          </div>
+
+          <!-- Quick Milk Inward Entry Form -->
+          <div class="bg-white rounded-3xl border border-gray-200 shadow-sm p-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-gray-100 gap-2 mb-4">
+              <div>
+                <h3 class="text-lg font-black text-gray-900 flex items-center gap-2">
+                  <span>🥛</span> Record Milk Inward from Farmer
+                </h3>
+                <p class="text-xs text-gray-500">Record litres, fat %, and rate when a farmer brings milk to the shop.</p>
+              </div>
+              <button onclick="App.openAddFarmerModal()" class="text-xs bg-purple-100 hover:bg-purple-200 text-purple-900 font-bold px-3 py-1.5 rounded-lg transition">
+                + Register New Farmer
+              </button>
+            </div>
+
+            <form onsubmit="App.submitFarmerMilkEntry(event)" class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                
+                <div>
+                  <label class="block text-xs font-bold text-gray-700 mb-1">Select Farmer *</label>
+                  <select id="inward-farmer-select" name="farmerId" required class="w-full border rounded-xl p-2.5 text-sm bg-gray-50 focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+                    <!-- Populated dynamically -->
+                  </select>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2">
+                  <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Shift</label>
+                    <select name="shift" class="w-full border rounded-xl p-2.5 text-sm bg-gray-50">
+                      <option value="morning">🌅 Morning</option>
+                      <option value="evening">🌆 Evening</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Date</label>
+                    <input type="date" id="inward-date-input" name="date" class="w-full border rounded-xl p-2.5 text-sm bg-gray-50" />
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-gray-700 mb-1">Milk Type</label>
+                  <select id="inward-milk-type" name="milkType" class="w-full border rounded-xl p-2.5 text-sm bg-gray-50">
+                    <option value="buffaloMilk">Buffalo Milk</option>
+                    <option value="cowMilk">Cow Milk</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-gray-700 mb-1">Litres Supplied *</label>
+                  <input type="number" step="0.1" id="inward-litres-input" name="litres" required placeholder="e.g. 15.5" oninput="App.calculateInwardTotal()"
+                    class="w-full border rounded-xl p-2.5 text-sm bg-white font-bold text-emerald-800 focus:ring-2 focus:ring-emerald-600 focus:outline-none" />
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-gray-700 mb-1">Fat %</label>
+                  <input type="number" step="0.1" name="fat" placeholder="e.g. 7.2" 
+                    class="w-full border rounded-xl p-2.5 text-sm bg-gray-50" />
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-gray-700 mb-1">SNF % (Optional)</label>
+                  <input type="number" step="0.1" name="snf" placeholder="e.g. 9.0" 
+                    class="w-full border rounded-xl p-2.5 text-sm bg-gray-50" />
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-gray-700 mb-1">Rate per Litre (₹) *</label>
+                  <input type="number" step="0.5" id="inward-rate-input" name="ratePerLitre" required placeholder="e.g. 53" oninput="App.calculateInwardTotal()"
+                    class="w-full border rounded-xl p-2.5 text-sm bg-white font-bold focus:ring-2 focus:ring-emerald-600 focus:outline-none" />
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-gray-700 mb-1">Payment Status</label>
+                  <select name="paidStatus" class="w-full border rounded-xl p-2.5 text-sm bg-gray-50">
+                    <option value="pending">Add to Khata / Pending Balance</option>
+                    <option value="paid">Paid Immediately (Cash / UPI)</option>
+                  </select>
+                </div>
+
+              </div>
+
+              <!-- Calculation Bar & Submit -->
+              <div class="p-4 bg-emerald-50 rounded-2xl flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center space-x-4">
+                  <span class="text-xs text-gray-600">Calculated Inward Total:</span>
+                  <span id="inward-total-display" class="text-2xl font-black text-emerald-800">₹0.00</span>
+                </div>
+
+                <div class="flex items-center space-x-2">
+                  <input type="text" name="notes" placeholder="Notes (e.g. Morning Can 1)" class="border rounded-xl px-3 py-2 text-xs bg-white w-48" />
+                  <button type="submit" class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold px-6 py-2.5 rounded-xl transition shadow">
+                    ✓ Save Milk Inward Entry
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- Today's Inward Collections Log -->
+          <div class="bg-white rounded-3xl border border-gray-200 shadow-sm overflow-hidden">
+            <div class="p-5 border-b border-gray-200 flex items-center justify-between">
+              <div>
+                <h3 class="text-base font-bold text-gray-900 flex items-center gap-2">
+                  <span>📋</span> Today's Farm Milk Collections Log
+                </h3>
+                <p class="text-xs text-gray-500">Log of all morning and evening milk batches collected from farmers today.</p>
+              </div>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-gray-50 border-b border-gray-200 text-xs font-bold text-gray-600">
+                    <th class="p-2.5">Shift</th>
+                    <th class="p-2.5">Farmer Name</th>
+                    <th class="p-2.5">Milk Type</th>
+                    <th class="p-2.5">Litres</th>
+                    <th class="p-2.5">Fat %</th>
+                    <th class="p-2.5">Rate/L</th>
+                    <th class="p-2.5">Total (₹)</th>
+                    <th class="p-2.5">Payment Status</th>
+                  </tr>
+                </thead>
+                <tbody id="today-collections-table-body">
+                  <!-- Loaded dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Farmer Accounts & Settlement Table -->
+          <div class="bg-white rounded-3xl border border-gray-200 shadow-sm overflow-hidden">
+            <div class="p-5 border-b border-gray-200 space-y-4">
+              <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                <div>
+                  <h3 class="text-lg font-black text-gray-900 flex items-center gap-2">
+                    <span>📖</span> Farmer Accounts & Settlement Ledger
+                  </h3>
+                  <p class="text-xs text-gray-500">Track total milk supplied and settle dues on a Daily, Weekly, or Monthly cycle.</p>
+                </div>
+
+                <!-- Filter by cycle -->
+                <div class="flex items-center space-x-2">
+                  <span class="text-xs text-gray-500 font-semibold">Payment Cycle:</span>
+                  <button onclick="App.filterFarmerCycle('all', this)" class="farmer-cycle-btn bg-emerald-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">All</button>
+                  <button onclick="App.filterFarmerCycle('daily', this)" class="farmer-cycle-btn bg-white text-gray-700 border border-gray-200 hover:bg-gray-50 text-xs font-bold px-3 py-1.5 rounded-lg transition">Daily</button>
+                  <button onclick="App.filterFarmerCycle('weekly', this)" class="farmer-cycle-btn bg-white text-gray-700 border border-gray-200 hover:bg-gray-50 text-xs font-bold px-3 py-1.5 rounded-lg transition">Weekly</button>
+                  <button onclick="App.filterFarmerCycle('monthly', this)" class="farmer-cycle-btn bg-white text-gray-700 border border-gray-200 hover:bg-gray-50 text-xs font-bold px-3 py-1.5 rounded-lg transition">Monthly</button>
+                </div>
+              </div>
+
+              <!-- Date Range Filter Bar -->
+              <div class="bg-stone-50 border border-stone-200/80 p-3.5 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs">
+                <div class="flex flex-wrap items-center gap-2.5">
+                  <span class="font-bold text-gray-700 flex items-center gap-1.5">
+                    <span class="text-emerald-700">📅</span> Date Range:
+                  </span>
+                  <div class="flex items-center space-x-1.5">
+                    <span class="text-gray-500 text-[11px] font-semibold">From:</span>
+                    <input type="date" id="farmer-date-start" onchange="App.handleFarmerDateRangeChange()"
+                      class="border border-gray-300 rounded-lg px-2.5 py-1 text-xs bg-white text-gray-800 font-medium focus:ring-2 focus:ring-emerald-600 focus:outline-none" />
+                  </div>
+                  <div class="flex items-center space-x-1.5">
+                    <span class="text-gray-500 text-[11px] font-semibold">To:</span>
+                    <input type="date" id="farmer-date-end" onchange="App.handleFarmerDateRangeChange()"
+                      class="border border-gray-300 rounded-lg px-2.5 py-1 text-xs bg-white text-gray-800 font-medium focus:ring-2 focus:ring-emerald-600 focus:outline-none" />
+                  </div>
+                  <button onclick="App.clearFarmerDateRange()" class="text-xs font-semibold text-gray-500 hover:text-red-600 underline cursor-pointer ml-1">
+                    Clear
+                  </button>
+                </div>
+
+                <!-- Quick Date Presets -->
+                <div class="flex items-center flex-wrap gap-1.5">
+                  <span class="text-gray-400 text-[11px] font-semibold mr-1">Presets:</span>
+                  <button type="button" onclick="App.setFarmerDatePreset('all', this)" class="farmer-date-preset-btn bg-emerald-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg transition shadow-xs">All Time</button>
+                  <button type="button" onclick="App.setFarmerDatePreset('today', this)" class="farmer-date-preset-btn bg-white text-gray-700 border border-gray-200 hover:bg-gray-100 text-[11px] font-bold px-2.5 py-1 rounded-lg transition">Today</button>
+                  <button type="button" onclick="App.setFarmerDatePreset('yesterday', this)" class="farmer-date-preset-btn bg-white text-gray-700 border border-gray-200 hover:bg-gray-100 text-[11px] font-bold px-2.5 py-1 rounded-lg transition">Yesterday</button>
+                  <button type="button" onclick="App.setFarmerDatePreset('last7', this)" class="farmer-date-preset-btn bg-white text-gray-700 border border-gray-200 hover:bg-gray-100 text-[11px] font-bold px-2.5 py-1 rounded-lg transition">Last 7 Days</button>
+                  <button type="button" onclick="App.setFarmerDatePreset('thisMonth', this)" class="farmer-date-preset-btn bg-white text-gray-700 border border-gray-200 hover:bg-gray-100 text-[11px] font-bold px-2.5 py-1 rounded-lg transition">This Month</button>
+                </div>
+              </div>
+
+              <!-- Active Summary Banner -->
+              <div id="farmer-ledger-date-summary" class="hidden text-xs bg-emerald-50 text-emerald-900 px-3.5 py-2 rounded-xl border border-emerald-200 font-medium flex items-center justify-between">
+                <span id="farmer-ledger-summary-text"></span>
+                <button onclick="App.clearFarmerDateRange()" class="text-[11px] font-bold text-emerald-800 hover:underline">Reset to All Time ✕</button>
+              </div>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-gray-50 border-b border-gray-200 text-xs font-bold text-gray-600 uppercase">
+                    <th class="p-3">Farmer Details</th>
+                    <th class="p-3">Milk & Rate</th>
+                    <th class="p-3">Payment Cycle</th>
+                    <th class="p-3">Total Litres</th>
+                    <th class="p-3">Total Earned & Paid</th>
+                    <th class="p-3">Balance Due</th>
+                    <th class="p-3">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="farmer-accounts-table-body">
+                  <!-- Loaded dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- SUBPANEL 2: DELIVERY SHEET (CUSTOMER DISPATCH) -->
+        <!-- ============================================================== -->
+        <div id="panel-delivery" class="owner-subpanel hidden space-y-6">
+          <div class="bg-white rounded-3xl border border-gray-200 shadow-sm overflow-hidden">
+            <div class="p-5 sm:p-6 border-b border-gray-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h3 class="text-lg font-black text-gray-900 flex items-center gap-2">
+                  <span>📋</span> Daily Delivery Register & Route Sheet
+                </h3>
+                <p class="text-xs text-gray-500">Check off delivered milk, record extra quantity, or note customer skips.</p>
+              </div>
+
+              <!-- Filter Buttons -->
+              <div class="flex items-center space-x-2">
+                <span class="text-xs text-gray-500 font-semibold">Filter:</span>
+                <button onclick="App.filterDeliveryShift('all', this)" class="shift-filter-btn bg-emerald-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg">All</button>
+                <button onclick="App.filterDeliveryShift('morning', this)" class="shift-filter-btn bg-white text-gray-700 border border-gray-200 text-xs font-bold px-3 py-1.5 rounded-lg">Morning Slot</button>
+                <button onclick="App.filterDeliveryShift('evening', this)" class="shift-filter-btn bg-white text-gray-700 border border-gray-200 text-xs font-bold px-3 py-1.5 rounded-lg">Evening Slot</button>
+                <button onclick="App.printDeliverySheet()" class="bg-gray-800 hover:bg-black text-white text-xs font-bold px-3 py-1.5 rounded-lg transition ml-2">
+                  🖨️ Print Route Sheet
+                </button>
+              </div>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-gray-50 border-b border-gray-200 text-xs font-bold text-gray-600 uppercase">
+                    <th class="p-3 w-10">#</th>
+                    <th class="p-3">Customer & Phone</th>
+                    <th class="p-3">Address / Route</th>
+                    <th class="p-3">Milk & Qty</th>
+                    <th class="p-3">Container / Note</th>
+                    <th class="p-3">Status</th>
+                    <th class="p-3 no-print">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="delivery-sheet-table-body">
+                  <!-- Loaded dynamically by app.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- SUBPANEL 3: CUSTOMER LEDGER & KHATA -->
+        <!-- ============================================================== -->
+        <div id="panel-ledger" class="owner-subpanel hidden space-y-6">
+          <div class="bg-white rounded-3xl border border-gray-200 shadow-sm overflow-hidden">
+            <div class="p-5 sm:p-6 border-b border-gray-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h3 class="text-lg font-black text-gray-900 flex items-center gap-2">
+                  <span>📖</span> Customer Monthly Ledger & Khata Book
+                </h3>
+                <p class="text-xs text-gray-500">Track monthly consumed litres, total bill, pending balance, and generate WhatsApp bills.</p>
+              </div>
+              <button onclick="App.openAddCustomerModal()" class="text-xs bg-emerald-100 hover:bg-emerald-200 text-emerald-900 font-bold px-3.5 py-2 rounded-xl transition">
+                + Add Customer
+              </button>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-gray-50 border-b border-gray-200 text-xs font-bold text-gray-600 uppercase">
+                    <th class="p-3">Customer Info</th>
+                    <th class="p-3">Milk Type & Rate</th>
+                    <th class="p-3">Month Litres</th>
+                    <th class="p-3">Current Bill</th>
+                    <th class="p-3">Balance Due</th>
+                    <th class="p-3">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="customer-ledger-table-body">
+                  <!-- Loaded dynamically by app.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- SUBPANEL 4: PROCUREMENT & RECONCILIATION -->
+        <!-- ============================================================== -->
+        <div id="panel-procurement" class="owner-subpanel hidden space-y-6">
+          <div class="bg-white rounded-3xl border border-gray-200 shadow-sm p-6">
+            <div class="mb-4">
+              <h3 class="text-lg font-black text-gray-900 flex items-center gap-2">
+                <span>🥛</span> Daily Procurement & Milk Reconciliation
+              </h3>
+              <p class="text-xs text-gray-500">Track total inward collection from farmers vs distribution to subscribers, counter sales, paneer/curd conversions, and closing stock.</p>
+            </div>
+
+            <form id="procurement-form" onsubmit="App.saveProcurementForm(event)" class="space-y-4">
+              <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-gray-700 mb-1">Morning Inward (L)</label>
+                  <input type="number" name="morningInward" class="w-full border rounded-xl p-2.5 text-sm bg-gray-50" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-gray-700 mb-1">Evening Inward (L)</label>
+                  <input type="number" name="eveningInward" class="w-full border rounded-xl p-2.5 text-sm bg-gray-50" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-gray-700 mb-1">Counter Sales (L)</label>
+                  <input type="number" name="counterSalesLitres" class="w-full border rounded-xl p-2.5 text-sm bg-gray-50" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-gray-700 mb-1">Paneer Used (L)</label>
+                  <input type="number" name="convertedToPaneerLitres" class="w-full border rounded-xl p-2.5 text-sm bg-gray-50" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-gray-700 mb-1">Curd Used (L)</label>
+                  <input type="number" name="convertedToCurdLitres" class="w-full border rounded-xl p-2.5 text-sm bg-gray-50" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-gray-700 mb-1">Wastage / Spill (L)</label>
+                  <input type="number" name="wastageLitres" class="w-full border rounded-xl p-2.5 text-sm bg-gray-50" />
+                </div>
+              </div>
+
+              <div class="p-4 bg-emerald-50 rounded-2xl flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center space-x-6 text-xs">
+                  <div>
+                    <span class="text-gray-500 block">Total Daily Milk Inward:</span>
+                    <strong id="proc-total-inward" class="text-sm text-gray-900">0 Litres</strong>
+                  </div>
+                  <div class="border-l border-emerald-200 pl-6">
+                    <span class="text-gray-500 block">Calculated Day Closing Balance:</span>
+                    <span id="proc-balance-litres" class="text-sm text-emerald-800 font-bold">0 Litres</span>
+                  </div>
+                </div>
+
+                <button type="submit" class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition">
+                  Update Procurement Log
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- SUBPANEL 5: RATES & SETTINGS -->
+        <!-- ============================================================== -->
+        <div id="panel-settings" class="owner-subpanel hidden space-y-6">
+          <div class="bg-white rounded-3xl border border-gray-200 shadow-sm p-6">
+            <div class="mb-4">
+              <h3 class="text-lg font-black text-gray-900 flex items-center gap-2">
+                <span>🏷️</span> Rate Card & Shop Settings
+              </h3>
+              <p class="text-xs text-gray-500">Update retail prices, farmer procurement base rates, and store details anytime.</p>
+            </div>
+
+            <form id="rates-settings-form" onsubmit="App.saveRatesAndSettings(event)" class="space-y-6">
+              
+              <!-- Customer Selling Rates -->
+              <div>
+                <h4 class="text-xs font-extrabold uppercase tracking-wider text-emerald-800 mb-3">Customer Selling Rates (₹ per unit)</h4>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+                  <div>
+                    <label class="block text-[11px] font-semibold text-gray-600 mb-1">Cow Milk (₹/L)</label>
+                    <input type="number" name="cowMilkRate" class="w-full border rounded-xl p-2 text-sm" />
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-semibold text-gray-600 mb-1">Buffalo Milk (₹/L)</label>
+                    <input type="number" name="buffaloMilkRate" class="w-full border rounded-xl p-2 text-sm" />
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-semibold text-gray-600 mb-1">Pure Ghee (₹/L)</label>
+                    <input type="number" name="gheeRate" class="w-full border rounded-xl p-2 text-sm" />
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-semibold text-gray-600 mb-1">Malai Paneer (₹/Kg)</label>
+                    <input type="number" name="paneerRate" class="w-full border rounded-xl p-2 text-sm" />
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-semibold text-gray-600 mb-1">Fresh Curd (₹/Kg)</label>
+                    <input type="number" name="curdRate" class="w-full border rounded-xl p-2 text-sm" />
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-semibold text-gray-600 mb-1">White Butter (₹/250g)</label>
+                    <input type="number" name="whiteButterRate" class="w-full border rounded-xl p-2 text-sm" />
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-semibold text-gray-600 mb-1">Osmania Biscuits (₹/pk)</label>
+                    <input type="number" name="osmaniaBiscuitsRate" class="w-full border rounded-xl p-2 text-sm" />
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-semibold text-gray-600 mb-1">Rusk Toast (₹/pk)</label>
+                    <input type="number" name="ruskToastRate" class="w-full border rounded-xl p-2 text-sm" />
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-semibold text-gray-600 mb-1">Bread (₹/loaf)</label>
+                    <input type="number" name="breadRate" class="w-full border rounded-xl p-2 text-sm" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Farmer Procurement Base Rates -->
+              <div class="border-t border-gray-100 pt-4">
+                <h4 class="text-xs font-extrabold uppercase tracking-wider text-purple-900 mb-3">Farmer Procurement Base Rates (₹ per Litre paid to farmers)</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Cow Milk Procurement Rate (₹/L)</label>
+                    <input type="number" step="0.5" name="farmerCowRate" class="w-full border rounded-xl p-2.5 text-sm" />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Buffalo Milk Procurement Rate (₹/L)</label>
+                    <input type="number" step="0.5" name="farmerBuffaloRate" class="w-full border rounded-xl p-2.5 text-sm" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Shop Profile & Online orders option -->
+              <div class="border-t border-gray-100 pt-4">
+                <h4 class="text-xs font-extrabold uppercase tracking-wider text-emerald-800 mb-3">Shop Profile & Contact</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                  <div>
+                    <label class="block text-[11px] font-semibold text-gray-600 mb-1">Dairy Name</label>
+                    <input type="text" name="shopName" class="w-full border rounded-xl p-2 text-sm" />
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-semibold text-gray-600 mb-1">Owner Name</label>
+                    <input type="text" name="ownerName" class="w-full border rounded-xl p-2 text-sm" />
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-semibold text-gray-600 mb-1">Calling Phone</label>
+                    <input type="text" name="shopPhone" class="w-full border rounded-xl p-2 text-sm" />
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-semibold text-gray-600 mb-1">WhatsApp Number (e.g. 919876543210)</label>
+                    <input type="text" name="shopWhatsapp" class="w-full border rounded-xl p-2 text-sm" />
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-semibold text-gray-600 mb-1">City / Region</label>
+                    <input type="text" name="shopCity" class="w-full border rounded-xl p-2 text-sm" />
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-semibold text-gray-600 mb-1">UPI ID for Invoices</label>
+                    <input type="text" name="shopUpiId" class="w-full border rounded-xl p-2 text-sm" />
+                  </div>
+                  <div class="sm:col-span-2 md:col-span-3">
+                    <label class="block text-[11px] font-semibold text-gray-600 mb-1">Tagline / Header Subtitle</label>
+                    <input type="text" name="shopTagline" class="w-full border rounded-xl p-2 text-sm" />
+                  </div>
+                  <div class="sm:col-span-2 md:col-span-3">
+                    <label class="block text-[11px] font-semibold text-gray-600 mb-1">Shop Address</label>
+                    <input type="text" name="shopAddress" class="w-full border rounded-xl p-2 text-sm" />
+                  </div>
+                </div>
+
+                <div class="mt-4 p-3 bg-amber-50 rounded-xl flex items-center space-x-3">
+                  <input type="checkbox" id="onlineOrdersOptionalCheck" name="onlineOrdersOptional" checked class="w-4 h-4 text-emerald-600 rounded" />
+                  <label for="onlineOrdersOptionalCheck" class="text-xs font-bold text-gray-800">
+                    Keep Online Ordering Optional (Encourages Direct Phone & WhatsApp Orders)
+                  </label>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between pt-2">
+                <div class="flex items-center space-x-2">
+                  <button type="button" onclick="App.exportDatabase()" class="text-xs font-bold text-gray-600 hover:text-gray-900 border px-3 py-2 rounded-lg bg-gray-50">
+                    💾 Backup / Export JSON
+                  </button>
+                  <button type="button" onclick="App.resetAllData()" class="text-xs font-bold text-red-600 hover:text-red-700 border border-red-200 px-3 py-2 rounded-lg bg-red-50">
+                    ⚠️ Reset Demo Data
+                  </button>
+                </div>
+
+                <button type="submit" class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold px-6 py-2.5 rounded-xl shadow-md transition">
+                  Save Rates & Store Profile
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-900 text-gray-400 text-xs py-12 border-t border-stone-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+        
+        <div class="space-y-3">
+          <div class="flex items-center space-x-2 text-white font-black text-base">
+            <span>🥛</span>
+            <span class="shop-title">Shree Krishna Fresh Milk & Dairy</span>
+          </div>
+          <p class="text-gray-400 text-xs leading-relaxed">
+            Delivering 100% pure, farm-fresh milk every morning to your doorstep. Uncompromised quality, no preservatives, and direct local support.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="text-white font-bold text-sm mb-3">Shop Address</h4>
+          <p class="shop-address text-gray-400 text-xs leading-relaxed">Shop No. 4, Opposite Green Park, Main Market Road</p>
+          <div class="mt-3">
+            <span class="text-gray-300 font-semibold block">Store Timings:</span>
+            <span class="shop-timings text-gray-400">Morning: 5:00 AM - 1:00 PM | Evening: 4:30 PM - 9:30 PM</span>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-white font-bold text-sm mb-3">Quick Links</h4>
+          <ul class="space-y-2">
+            <li><a href="#rates-section" class="hover:text-white transition">Today's Rate Card</a></li>
+            <li><a href="#subscription-builder-section" class="hover:text-white transition">Start Daily Subscription</a></li>
+            <li><a href="#products-section" class="hover:text-white transition">Paneer, Ghee & Sweets</a></li>
+            <li><button onclick="App.openVacationModal()" class="hover:text-white transition">Pause for Vacation</button></li>
+            <li><button onclick="App.openAreaCheckerModal()" class="hover:text-white transition">Delivery Coverage Areas</button></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-white font-bold text-sm mb-3">Contact & Orders</h4>
+          <div class="space-y-2">
+            <div>
+              <span class="block text-gray-500">Calling Number:</span>
+              <a href="#" class="shop-phone text-emerald-400 font-bold hover:underline">+91 98765 43210</a>
+            </div>
+            <div>
+              <span class="block text-gray-500">Order via WhatsApp:</span>
+              <a href="#" target="_blank" class="shop-whatsapp-link text-green-400 font-bold hover:underline">Chat with Dairy on WhatsApp</a>
+            </div>
+            <div class="pt-2">
+              <button onclick="App.switchView('owner')" class="text-xs bg-stone-800 hover:bg-stone-700 text-gray-200 px-3 py-1.5 rounded-lg border border-stone-700">
+                ⚙️ Milk Shop Owner Dashboard
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 pt-6 border-t border-stone-800 text-center text-stone-500 text-[11px]">
+        © 2026 Shree Krishna Fresh Milk & Dairy. Dedicated to farmer welfare and pure doorstep nutrition.
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- MODALS & DRAWERS -->
+  <!-- ============================================================== -->
+
+  <!-- 1. CART SLIDE-OVER DRAWER (OPTIONAL) -->
+  <div id="cart-drawer" class="hidden fixed inset-0 z-50 overflow-hidden">
+    <div class="cart-drawer-overlay absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="App.toggleCart(false)"></div>
+    <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
+      <div id="cart-panel" class="cart-drawer-panel translate-x-full w-screen max-w-md bg-white shadow-2xl flex flex-col justify-between">
+        
+        <div class="p-5 border-b border-gray-200 flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <span class="text-2xl">🛒</span>
+            <div>
+              <h3 class="font-black text-gray-900 text-base">Your Dairy Basket</h3>
+              <span class="text-[11px] text-amber-700 font-bold">Online order is optional • Direct calls welcome</span>
+            </div>
+          </div>
+          <button onclick="App.toggleCart(false)" class="p-2 text-gray-400 hover:text-gray-700 rounded-lg">
+            ✕
+          </button>
+        </div>
+
+        <div id="cart-drawer-items" class="flex-1 p-5 overflow-y-auto space-y-3">
+          <!-- Dynamically filled by app.js -->
+        </div>
+
+        <div class="p-5 border-t border-gray-200 bg-gray-50 space-y-3">
+          <div class="flex items-center justify-between text-sm">
+            <span class="text-gray-600">Subtotal:</span>
+            <span id="cart-subtotal" class="font-black text-xl text-gray-900">₹0</span>
+          </div>
+          <div class="text-[11px] text-emerald-700 flex items-center gap-1 font-medium">
+            <span>✨</span> <span>Free delivery on milk subscriptions or orders above ₹150</span>
+          </div>
+          <button onclick="App.openCheckoutModal()" 
+            class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-extrabold py-3.5 rounded-xl transition shadow-md flex items-center justify-center gap-2 text-sm">
+            <span>Proceed to Order (Checkout)</span> →
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. CHECKOUT MODAL -->
+  <div id="checkout-modal" class="hidden fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4">
+    <div class="fixed inset-0 bg-black/50 backdrop-blur-sm" onclick="App.closeCheckoutModal()"></div>
+    <div class="relative bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-gray-100 z-10">
+      <div class="flex items-center justify-between pb-3 border-b border-gray-100">
+        <h3 class="font-black text-lg text-gray-900">Complete Your Order</h3>
+        <button onclick="App.closeCheckoutModal()" class="text-gray-400 hover:text-gray-600 font-bold">✕</button>
+      </div>
+
+      <form onsubmit="App.submitCheckoutForm(event)" class="mt-4 space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1">Your Name *</label>
+          <input type="text" name="orderName" required placeholder="Your full name" 
+            class="w-full border rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1">Mobile / WhatsApp Number *</label>
+          <input type="tel" name="orderPhone" required placeholder="e.g. 9811223344" 
+            class="w-full border rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1">Delivery Address *</label>
+          <input type="text" name="orderAddress" required placeholder="House/Flat number, Society, Street" 
+            class="w-full border rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Preferred Slot</label>
+            <select name="orderSlot" class="w-full border rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+              <option value="Morning Delivery (5:30 - 7:30 AM)">Morning (5:30 - 7:30 AM)</option>
+              <option value="Evening Delivery (5:00 - 7:00 PM)">Evening (5:00 - 7:00 PM)</option>
+              <option value="Store Pickup">Store Pickup</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Payment Method</label>
+            <select name="orderPayment" class="w-full border rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+              <option value="Cash on Delivery">Cash on Delivery</option>
+              <option value="UPI QR on Delivery">UPI QR on Delivery</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="p-3 bg-emerald-50 rounded-xl flex items-center justify-between text-sm">
+          <span class="text-gray-600 font-medium">Total Payable:</span>
+          <span id="checkout-total-val" class="font-black text-xl text-emerald-800">₹0</span>
+        </div>
+
+        <button type="submit" 
+          class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-extrabold py-3.5 rounded-xl transition shadow-md flex items-center justify-center gap-2 text-sm">
+          <span>📲</span> Send Order via WhatsApp
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 3. VACATION / PAUSE MODAL -->
+  <div id="vacation-modal" class="hidden fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4">
+    <div class="fixed inset-0 bg-black/50 backdrop-blur-sm" onclick="App.closeVacationModal()"></div>
+    <div class="relative bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-gray-100 z-10">
+      <div class="flex items-center justify-between pb-3 border-b border-gray-100">
+        <h3 class="font-black text-lg text-gray-900 flex items-center gap-2">
+          <span>⏸️</span> Manage Your Subscription (Vacation / Extra Milk)
+        </h3>
+        <button onclick="App.closeVacationModal()" class="text-gray-400 hover:text-gray-600 font-bold">✕</button>
+      </div>
+
+      <div class="mt-4 space-y-4">
+        <p class="text-xs text-gray-600">Enter your 10-digit mobile number to pause daily milk for your vacation or request extra milk for today.</p>
+        
+        <div class="flex gap-2">
+          <input type="tel" id="vacation-search-phone" placeholder="Enter Registered Mobile" 
+            class="flex-1 border rounded-xl px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none" />
+          <button onclick="App.searchCustomerForVacation()" class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold px-4 rounded-xl transition">
+            Search
+          </button>
+        </div>
+
+        <div id="vacation-result" class="hidden">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. DELIVERY AREA CHECKER MODAL -->
+  <div id="area-checker-modal" class="hidden fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4">
+    <div class="fixed inset-0 bg-black/50 backdrop-blur-sm" onclick="App.closeAreaCheckerModal()"></div>
+    <div class="relative bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-gray-100 z-10">
+      <div class="flex items-center justify-between pb-3 border-b border-gray-100">
+        <h3 class="font-black text-lg text-gray-900 flex items-center gap-2">
+          <span>📍</span> Delivery Coverage Areas
+        </h3>
+        <button onclick="App.closeAreaCheckerModal()" class="text-gray-400 hover:text-gray-600 font-bold">✕</button>
+      </div>
+
+      <div class="mt-4 space-y-4">
+        <p class="text-xs text-gray-600">Check if your locality or pincode receives our morning doorstep delivery.</p>
+        
+        <div class="flex gap-2">
+          <input type="text" id="pincode-input" placeholder="Enter Pincode or Society Name" 
+            class="flex-1 border rounded-xl px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none" />
+          <button onclick="App.checkPincode()" class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold px-4 rounded-xl transition">
+            Check
+          </button>
+        </div>
+
+        <div id="pincode-result"></div>
+
+        <div>
+          <h4 class="text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Our Active Delivery Routes</h4>
+          <div id="area-list-container" class="space-y-2 max-h-56 overflow-y-auto">
+            <!-- Loaded dynamically -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. INVOICE / SLIP MODAL -->
+  <div id="bill-modal" class="hidden fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4">
+    <div class="fixed inset-0 bg-black/60 backdrop-blur-sm" onclick="App.closeBillModal()"></div>
+    <div class="relative bg-white rounded-3xl max-w-2xl w-full p-6 shadow-2xl border border-gray-100 z-10">
+      <div class="flex items-center justify-between pb-3 border-b border-gray-100 no-print">
+        <h3 class="font-black text-lg text-gray-900">Customer Milk Bill & Invoice</h3>
+        <button onclick="App.closeBillModal()" class="text-gray-400 hover:text-gray-600 font-bold">✕</button>
+      </div>
+
+      <div id="bill-modal-content" class="mt-4">
+        <!-- Loaded dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. ADD NEW CUSTOMER MODAL -->
+  <div id="add-customer-modal" class="hidden fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4">
+    <div class="fixed inset-0 bg-black/50 backdrop-blur-sm" onclick="App.closeAddCustomerModal()"></div>
+    <div class="relative bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-gray-100 z-10">
+      <div class="flex items-center justify-between pb-3 border-b border-gray-100">
+        <h3 class="font-black text-lg text-gray-900">Add New Subscription Customer</h3>
+        <button onclick="App.closeAddCustomerModal()" class="text-gray-400 hover:text-gray-600 font-bold">✕</button>
+      </div>
+
+      <form onsubmit="App.submitAddCustomerForm(event)" class="mt-4 space-y-3">
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Customer Name *</label>
+            <input type="text" name="custName" required placeholder="Customer full name" class="w-full border rounded-xl p-2 text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Phone Number *</label>
+            <input type="tel" name="custPhone" required placeholder="Mobile number" class="w-full border rounded-xl p-2 text-sm" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1">Address / Flat No *</label>
+          <input type="text" name="custAddress" required placeholder="Full doorstep address" class="w-full border rounded-xl p-2 text-sm" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Route / Area</label>
+            <input type="text" name="custRoute" placeholder="e.g. Sector 15 Route" class="w-full border rounded-xl p-2 text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Milk Type</label>
+            <select name="custMilkType" class="w-full border rounded-xl p-2 text-sm">
+              <option value="cowMilk">Pure Cow Milk</option>
+              <option value="buffaloMilk">Creamy Buffalo Milk</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Daily Litres</label>
+            <input type="number" step="0.5" name="custDailyQty" value="1.0" class="w-full border rounded-xl p-2 text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Delivery Slot</label>
+            <select name="custSlot" class="w-full border rounded-xl p-2 text-sm">
+              <option value="morning">Morning (5:30 - 7:30 AM)</option>
+              <option value="evening">Evening (5:00 - 7:00 PM)</option>
+              <option value="both">Both Morning & Evening</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Container</label>
+            <input type="text" name="custContainer" placeholder="Glass Bottle / Own Can" class="w-full border rounded-xl p-2 text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Delivery Note</label>
+            <input type="text" name="custNotes" placeholder="Do not ring bell / Hang on gate" class="w-full border rounded-xl p-2 text-sm" />
+          </div>
+        </div>
+
+        <div class="pt-3 flex justify-end gap-2">
+          <button type="button" onclick="App.closeAddCustomerModal()" class="px-4 py-2 border rounded-xl text-xs font-bold text-gray-600">Cancel</button>
+          <button type="submit" class="px-5 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold">Save Customer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 7. ADD NEW FARMER MODAL -->
+  <div id="add-farmer-modal" class="hidden fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4">
+    <div class="fixed inset-0 bg-black/50 backdrop-blur-sm" onclick="App.closeAddFarmerModal()"></div>
+    <div class="relative bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-gray-100 z-10">
+      <div class="flex items-center justify-between pb-3 border-b border-gray-100">
+        <h3 class="font-black text-lg text-gray-900 flex items-center gap-2">
+          <span>🧑‍🌾</span> Register New Dairy Farmer
+        </h3>
+        <button onclick="App.closeAddFarmerModal()" class="text-gray-400 hover:text-gray-600 font-bold">✕</button>
+      </div>
+
+      <form onsubmit="App.submitAddFarmerForm(event)" class="mt-4 space-y-3">
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Farmer Full Name *</label>
+            <input type="text" name="farmerName" required placeholder="e.g. Ramesh Sharma" class="w-full border rounded-xl p-2 text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Village / Locality *</label>
+            <input type="text" name="farmerVillage" required placeholder="e.g. Badshahpur" class="w-full border rounded-xl p-2 text-sm" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Mobile Number *</label>
+            <input type="tel" name="farmerPhone" required placeholder="e.g. 9811012345" class="w-full border rounded-xl p-2 text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Primary Milk Type</label>
+            <select name="farmerMilkType" class="w-full border rounded-xl p-2 text-sm">
+              <option value="buffaloMilk">Buffalo Milk</option>
+              <option value="cowMilk">Cow Milk</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Payment Settlement Cycle *</label>
+            <select name="farmerPaymentCycle" class="w-full border rounded-xl p-2 text-sm font-bold text-purple-900">
+              <option value="daily">Daily Settlement (Cash Every Day)</option>
+              <option value="weekly">Weekly Settlement (Every 7 Days)</option>
+              <option value="monthly">Monthly Settlement (Once a Month)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Base Rate per Litre (₹)</label>
+            <input type="number" step="0.5" name="farmerBaseRate" value="53" class="w-full border rounded-xl p-2 text-sm" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1">Payout Method / UPI ID / Account</label>
+          <input type="text" name="farmerPayoutMethod" placeholder="Cash Handover / PhonePe / Bank Account" class="w-full border rounded-xl p-2 text-sm" />
+        </div>
+
+        <div class="pt-3 flex justify-end gap-2">
+          <button type="button" onclick="App.closeAddFarmerModal()" class="px-4 py-2 border rounded-xl text-xs font-bold text-gray-600">Cancel</button>
+          <button type="submit" class="px-5 py-2 bg-purple-700 hover:bg-purple-800 text-white rounded-xl text-xs font-bold">Register Farmer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
